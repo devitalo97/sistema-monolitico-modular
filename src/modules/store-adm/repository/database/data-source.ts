@@ -1,11 +1,14 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { StoreModel } from "../store.model"
+import { config } from "../../../../config"
 
+
+console.log(config)
 export const AppDataSource = new DataSource({
     type: "mongodb",
-    url: "mongodb+srv://beinus_mono:QbY5CVcOuMOWcimq@beinus-cluster.132sj.mongodb.net/?retryWrites=true&w=majority",
-    database: "sistema-monolitico",
+    url: config.MONGO_DATABASE_URL,
+    database: config.MONGO_DATABASE_NAME,
     synchronize: true,
     logging: false,
     entities: [StoreModel],
