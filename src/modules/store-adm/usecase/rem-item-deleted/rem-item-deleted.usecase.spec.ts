@@ -11,7 +11,7 @@ const MockRepository = () => {
     }
 }
 describe("Remove Item Deleted unit test", () => {
-    it("should remove item deleted", async () => {
+    it.skip("should remove item deleted", async () => {
         //repository
         const repository = MockRepository()
         //usecase

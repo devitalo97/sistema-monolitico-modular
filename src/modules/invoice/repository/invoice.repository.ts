@@ -1,4 +1,4 @@
-import { transformEntityData } from "../../../util/transformEntityData";
+import { transform } from "../../../util/transform";
 import Address from "../../@shared/domain/value-object/address.value-object";
 import Invoice from "../domain/invoice.entity";
 import Product from "../domain/product.entity";
@@ -15,9 +15,9 @@ export default class InvoiceRepository implements InvoiceGateway {
 
     async save(input: Invoice){
         const invoice = this._repository.create({
-            ...transformEntityData(input, 'db'),
-            items: input?.items?.map(prod => transformEntityData(prod, 'db')),
-            address: transformEntityData(input.address, 'db')
+            ...transform(input, 'db'),
+            items: input?.items?.map(prod => transform(prod, 'db')),
+            address: transform(input.address, 'db')
         })
         await this._repository.save(invoice)
     }

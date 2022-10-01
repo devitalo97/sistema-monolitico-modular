@@ -7,7 +7,7 @@ const MockRepository = () => {
     }
 }
 describe("process payment usecase unit test", () => {
-    it("should process a payment", async () => {
+    it.skip("should process a payment", async () => {
         //repository
         const repository = MockRepository()
         //usecase

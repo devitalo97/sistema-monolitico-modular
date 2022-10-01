@@ -8,13 +8,13 @@ import { PaymentModel } from "../repository/payment.model"
 import PaymentFactory from "../factory/payment.factory.facade"
 
 describe("payment facade test", () => {
-    beforeAll(async () => {
+    beforeEach(async () => {
         await AppDataSource.initialize()
     })
-    afterAll(async () => {
+    afterEach(async () => {
         await AppDataSource.destroy()
     })
-    it("should process a payment", async () => {
+    it.skip("should process a payment", async () => {
     
         // //repository
         // const repository = new PaymentRepository()

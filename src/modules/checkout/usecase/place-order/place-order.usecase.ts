@@ -139,8 +139,7 @@ export default class PlaceOrderUseCase implements UseCaseInterface {
             let idsNotFound = ids?.filter(el => !productReveidIds.includes(el.id))?.map(item => item.id)
             throw new Error(`Some product not found: ${JSON.stringify(idsNotFound)}`)
         }
-
-        
+       
         const result = products?.map(prod => {
             const { priceId } = input.products.filter(el => el.productId === prod.id)[0]
             const { price } = prod?.price?.filter(price => price.id === priceId)[0]

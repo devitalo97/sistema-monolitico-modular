@@ -1,6 +1,3 @@
-import Price from "../../domain/price.entity";
-import Promo from "../../domain/promo.entity";
-
 interface PriceProps {
     id?: string,
     stock: number

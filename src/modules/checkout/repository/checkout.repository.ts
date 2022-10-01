@@ -1,4 +1,4 @@
-import { transformEntityData } from "../../../util/transformEntityData";
+import { transform } from "../../../util/transform";
 import Client from "../domain/client.entity";
 import Order from "../domain/order.entity";
 import Product from "../domain/product.entity";
@@ -16,12 +16,12 @@ export default class CheckoutRepository implements CheckoutGateway {
     async add(input: Order): Promise<void>{
         const client = {
             ...input.client,
-            address: transformEntityData(input.client.address, 'db')
+            address: transform(input.client.address, 'db')
         }
         const order = this._repository.create({
-            ...transformEntityData(input, 'db'),
-            client: transformEntityData(client, 'db'),
-            products: input?.products?.map(prod => transformEntityData(prod, 'db'))
+            ...transform(input, 'db'),
+            client: transform(client, 'db'),
+            products: input?.products?.map(prod => transform(prod, 'db'))
         })
         await this._repository.save(order)
     }

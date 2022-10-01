@@ -1,5 +1,5 @@
 import { assign } from "../../../util/assign";
-import { transformEntityData } from "../../../util/transformEntityData";
+import { transform } from "../../../util/transform";
 import BaseEntity from "../../@shared/domain/entity/base.entity";
 
 type ItemProps = {

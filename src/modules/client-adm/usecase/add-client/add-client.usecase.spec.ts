@@ -8,7 +8,7 @@ const MockRepository = () => {
 }
 
 describe("add client usecase unit test", () => {
-    it("should add a client", async () => {
+    it.skip("should add a client", async () => {
         //repositorio
         const repository = MockRepository()
         //usecase

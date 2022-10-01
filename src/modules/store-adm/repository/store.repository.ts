@@ -1,4 +1,4 @@
-import { transformEntityData } from "../../../util/transformEntityData";
+import { transform } from "../../../util/transform";
 import ItemEntity from "../domain/item.entity";
 import StoreEntity from "../domain/store.entity";
 import StoreGatway from "../gateway/store.gateway";
@@ -16,7 +16,7 @@ export default class StoreRepository implements StoreGatway {
     async create(input: StoreEntity): Promise<void> {
         const store = this._repository.create({
             id: input.id,
-            items: input?.items?.map(item => transformEntityData(item, 'db'))
+            items: input?.items?.map(item => transform(item, 'db'))
         })
         await this._repository.save(store)
     }
@@ -25,7 +25,7 @@ export default class StoreRepository implements StoreGatway {
         await this._repository.updateOne(
             { id: storeId },
             {$push:{
-                items: {$each: items?.map((item:any) => transformEntityData(item, 'db'))}
+                items: {$each: items?.map((item:any) => transform(item, 'db'))}
             }}
         )
     }
@@ -34,7 +34,7 @@ export default class StoreRepository implements StoreGatway {
         await this._repository.updateOne(
             { id: storeId },
             { $pullAll:{
-                items: items?.map((item:any) => transformEntityData(item, 'db'))
+                items: items?.map((item:any) => transform(item, 'db'))
             }}
         )
     }

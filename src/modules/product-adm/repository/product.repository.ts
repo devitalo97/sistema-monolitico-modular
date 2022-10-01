@@ -2,7 +2,7 @@ import productEntity from "../domain/product.entity";
 import ProductGateway from "../gateway/product.gateway";
 import { ProductModel } from "./product.model";
 import { AppDataSource } from './database/data-source'
-import { transformEntityData } from "../../../util/transformEntityData";
+import { transform } from "../../../util/transform";
 import Product from "../domain/product.entity";
 import Price from "../domain/price.entity";
 import Promo from "../domain/promo.entity";
@@ -20,8 +20,8 @@ export default class ProductRepository implements ProductGateway {
             name: input.name,
             description: input.description,
             ableToSell: input.ableToSell,
-            price: input?.price?.map(variant => transformEntityData(variant, 'db')),
-            promo: input?.promo?.map(variant => transformEntityData(variant, 'db')),
+            price: input?.price?.map(variant => transform(variant, 'db')),
+            promo: input?.promo?.map(variant => transform(variant, 'db')),
             medias: input.medias,
             details: input.details,
         })
@@ -40,9 +40,9 @@ export default class ProductRepository implements ProductGateway {
     async update(product: DTO.UpdateProductRepositoryInputDto): Promise<Product> {
         
         const update = {
-            ...transformEntityData(product, 'db'),
-            price: {...product?.price?.map(price => transformEntityData(price, 'db'))},
-            promo: {...product?.promo?.map(promo => transformEntityData(promo, 'db'))},
+            ...transform(product, 'db'),
+            price: {...product?.price?.map(price => transform(price, 'db'))},
+            promo: {...product?.promo?.map(promo => transform(promo, 'db'))},
         }
 
         !product.price && delete update.price

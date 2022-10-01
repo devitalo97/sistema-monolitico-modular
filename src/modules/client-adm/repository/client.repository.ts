@@ -1,4 +1,4 @@
-import { transformEntityData } from "../../../util/transformEntityData";
+import { transform } from "../../../util/transform";
 import Address from "../../@shared/domain/value-object/address.value-object";
 import Client from "../domain/client.entity";
 import { ClientGateway } from "../gateway/client.gateway";
@@ -23,8 +23,8 @@ export default class ClientRepository implements ClientGateway{
 
     async add(input: Client){
         const client = this._repository.create({
-            ...transformEntityData(input, 'db'),
-            address: transformEntityData(input.address, 'db')
+            ...transform(input, 'db'),
+            address: transform(input.address, 'db')
         })
         await this._repository.save(client)
     }

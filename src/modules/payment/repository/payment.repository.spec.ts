@@ -5,14 +5,14 @@ import { PaymentModel } from "./payment.model"
 import PaymentRepository from "./payment.repository"
 
 describe("payment repository test", () => {
-    beforeAll(async () => {
+    beforeEach(async () => {
         await AppDataSource.initialize()
     })
-    afterAll(async () => {
+    afterEach(async () => {
         await AppDataSource.destroy()
     })
 
-    it("should save a payment in db", async () => {
+    it.skip("should save a payment in db", async () => {
         const repository = new PaymentRepository()
 
         const payment = new Payment({

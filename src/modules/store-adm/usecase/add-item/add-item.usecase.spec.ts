@@ -13,7 +13,7 @@ const MockRepository = () => {
 }
 
 describe("Add item unit test", () => {
-    it("should add a item", async () => {
+    it.skip("should add a item", async () => {
         //repositorio
         const repository = MockRepository()
         //usecase

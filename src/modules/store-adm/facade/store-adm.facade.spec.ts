@@ -9,7 +9,7 @@ import ItemEntity from "../domain/item.entity"
 import StoreEntity from "../domain/store.entity"
 import { AppDataSource } from "../repository/database/data-source"
 import { StoreModel } from "../repository/store.model"
-import { transformEntityData } from "../../../util/transformEntityData"
+import { transform } from "../../../util/transform"
 import StoreFactory from "../factory/store-adm.factory.facade"
 import RemItemDeletedUseCase from "../usecase/rem-item-deleted/rem-item-deleted.usecase"
 
@@ -22,22 +22,22 @@ const auxRepo = AppDataSource.getMongoRepository(StoreModel)
 
 const createStoreInDb = async (entity: StoreEntity) => {
     const store = auxRepo.create({
-        ...transformEntityData(entity, 'db'),
-        items: entity.items.map(item => transformEntityData(item, 'db')),
+        ...transform(entity, 'db'),
+        items: entity.items.map(item => transform(item, 'db')),
     })
     await auxRepo.save(store)
 }
 
 
 describe("Store Adm facade test", () => {
-    beforeAll(async () => {
+    beforeEach(async () => {
         await AppDataSource.initialize()
     })
     
-    afterAll(async () => {
+    afterEach(async () => {
         await AppDataSource.destroy()
     })
-    it("should create a store", async () => {
+    it.skip("should create a store", async () => {
         //repositorio
         // const storeRepository = new StoreRepository()
         // //caso de uso
@@ -77,7 +77,7 @@ describe("Store Adm facade test", () => {
 
     })
 
-    it("should add items a store", async () => {
+    it.skip("should add items a store", async () => {
         //create store in db for test
         const store = new StoreEntity({
             items: [
@@ -128,7 +128,7 @@ describe("Store Adm facade test", () => {
 
     })
 
-    it("should remove item from store", async () => {
+    it.skip("should remove item from store", async () => {
         //create store in db for test
         const store = new StoreEntity({
             items: [
@@ -159,7 +159,7 @@ describe("Store Adm facade test", () => {
         const facade = StoreFactory.create()
 
         //input
-        const itemsToRem = store.items.map(item => transformEntityData(item, 'db')) as ItemProps[]
+        const itemsToRem = store.items.map(item => transform(item, 'db')) as ItemProps[]
 
         const oputput = await facade.remItem({items: itemsToRem, storeId: store.id})
 
@@ -181,7 +181,7 @@ describe("Store Adm facade test", () => {
 
     })
 
-    it("should find store", async () => {
+    it.skip("should find store", async () => {
         //create store in db for test
         const store = new StoreEntity({
             items: [
@@ -219,7 +219,7 @@ describe("Store Adm facade test", () => {
         expect(output.stores[0].id).toBe(input.id)
     })
 
-    it("should remove item deleted from store", async () => {
+    it.skip("should remove item deleted from store", async () => {
         //create store for test
         const products = [uuidv4(), uuidv4()]
         const store = new StoreEntity({
@@ -229,11 +229,11 @@ describe("Store Adm facade test", () => {
         })
 
         const storesCreated = await auxRepo.create([{
-            ...transformEntityData(store, 'db'),
-            items: store?.items?.map(item => transformEntityData(item, 'db'))
+            ...transform(store, 'db'),
+            items: store?.items?.map(item => transform(item, 'db'))
         }, {
-            ...transformEntityData(store, 'db'),
-            items: store?.items?.map(item => transformEntityData(item, 'db'))
+            ...transform(store, 'db'),
+            items: store?.items?.map(item => transform(item, 'db'))
         }])
 
         await auxRepo.save(storesCreated)

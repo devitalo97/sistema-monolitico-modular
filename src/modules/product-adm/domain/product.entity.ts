@@ -1,5 +1,5 @@
 import { assign } from "../../../util/assign";
-import { transformEntityData } from "../../../util/transformEntityData";
+import { transform } from "../../../util/transform";
 import AggregateRoot from "../../@shared/domain/entity/aggregate-root.interface";
 import BaseEntity from "../../@shared/domain/entity/base.entity";
 import Price from "./price.entity";

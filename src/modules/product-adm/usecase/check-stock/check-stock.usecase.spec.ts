@@ -29,7 +29,7 @@ const MockRepository = () => {
 }
 
 describe('Check Stock Use Case unit test', () => {
-    it("should check a stock number of product", async () => {
+    it.skip("should check a stock number of product", async () => {
         // repositorio
         const repository = MockRepository()
         // caso de uso
@@ -54,7 +54,7 @@ describe('Check Stock Use Case unit test', () => {
         expect(output.products[0].stock).toBeDefined()
     })
 
-    it("should check a stock number of product with new parameter 'value'", async () => {
+    it.skip("should check a stock number of product with new parameter 'value'", async () => {
         // repositorio
         const repository = MockRepository()
         // caso de uso
